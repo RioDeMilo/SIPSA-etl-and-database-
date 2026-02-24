@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/milo/SIPSA/cliente-webservice-sipsa/env
+set -gx VIRTUAL_ENV /home/milo/sipsa/cliente-webservice-sipsa/env
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
