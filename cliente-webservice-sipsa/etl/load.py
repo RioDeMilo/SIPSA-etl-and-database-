@@ -3,7 +3,7 @@ import sqlite3
 import numpy
 import pandas as pd
 
-def update_database(clean_data : pd.DataFrame):
+def update_database(clean_data : pd.DataFrame, db_table_name : str, index : bool):
     # DictWriter automatically handles header mapping and commas in data
     #clean_data.to_csv(path_file,index=False,mode='a',header=False)  
     # now we also insert here the SQL database upload
@@ -13,19 +13,19 @@ def update_database(clean_data : pd.DataFrame):
     BASE_DIR = Path(__file__).resolve().parent.parent.parent
     correct_path = BASE_DIR / "database" / "sipsa.db"
 
-    try:
+#    try:
         # 2. Definir 'conn' ANTES de usarla
-        conn = sqlite3.connect(str(correct_path))
+    conn = sqlite3.connect(str(correct_path))
         
-        print(f"Intentando guardar en: {correct_path}")
+    print(f"Intentando guardar en: {correct_path}")
         
         # 3. Ejecutar el guardado
-        clean_data.to_sql("cities", conn, if_exists="delete_rows", index=False)
-        conn.close()
-        print(">>> Guardado exitoso en base de datos.")
+    clean_data.to_sql(db_table_name, conn, if_exists="delete_rows", index = index)
+    conn.close()
+    print(">>> Guardado exitoso en base de datos.")
 # the to_sql is a pandas function
-#
-    except Exception as e:
-        print(f"Error al guardar: {e}")
+ #
+#    except Exception as e:
+#        print(f"Error al guardar: {e}")
 
 
