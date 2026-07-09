@@ -1,0 +1,26 @@
+[Unit]
+Description=AgroPrecios WhatsApp Bot (FastAPI)
+After=network.target
+
+[Service]
+# ── Change these two to match your Droplet user and folder ──
+User=milo
+WorkingDirectory=/agroprecios/app
+
+# Activate the virtualenv and start Uvicorn
+ExecStart=/agroprecios/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000 --workers 1
+
+# Restart automatically if it crashes
+Restart=on-failure
+RestartSec=5
+
+# Load the .env file so secrets are available
+EnvironmentFile=/agroprecios/.env
+
+# Write logs to the journal (read with: journalctl -u agroprecios -f)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=agroprecios
+
+[Install]
+WantedBy=multi-user.target
